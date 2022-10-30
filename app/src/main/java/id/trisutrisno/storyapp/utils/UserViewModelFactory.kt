@@ -12,6 +12,7 @@ import id.trisutrisno.storyapp.repository.UserRepository
 import id.trisutrisno.storyapp.ui.SplashViewModel
 import id.trisutrisno.storyapp.ui.auth.LoginViewModel
 import id.trisutrisno.storyapp.ui.auth.RegisterViewModel
+import id.trisutrisno.storyapp.ui.map.MapsViewModel
 import id.trisutrisno.storyapp.ui.story.StoryViewModel
 import id.trisutrisno.storyapp.ui.upload.UploadStoryViewModel
 
@@ -41,6 +42,9 @@ class UserViewModelFactory(
             }
             modelClass.isAssignableFrom(UploadStoryViewModel::class.java) -> {
                 UploadStoryViewModel(userRepository, storyRepository) as T
+            }
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(storyRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

@@ -27,8 +27,8 @@ class SplashscreenActivity : AppCompatActivity() {
     private fun validateUser() {
         viewModel.fetchUser().observe(this){ token ->
             if (token != ""){
-                startActivity(Intent(this, StoryActivity::class.java).putExtra(
-                    StoryActivity.EXTRA_TOKEN, token))
+                startActivity(Intent(this, MainActivity::class.java).putExtra(
+                    MainActivity.EXTRA_TOKEN, token))
                 finish()
             } else {
                 startActivity(Intent(this, LoginActivity::class.java))

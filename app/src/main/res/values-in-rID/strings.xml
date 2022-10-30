@@ -34,4 +34,6 @@
     <string name="location_permission_denied">Akses lokasi tidak diizinkan</string>
     <string name="location_permission_denied_action">Ubah Pengaturan</string>
     <string name="share_location">Bagikan Lokasi</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_map">Peta</string>
 </resources>

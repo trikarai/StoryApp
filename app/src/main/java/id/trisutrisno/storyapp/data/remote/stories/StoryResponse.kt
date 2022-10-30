@@ -8,7 +8,7 @@ data class StoryResponse(
     @field: SerializedName("error")
     val error: Boolean,
 
-    @field: SerializedName("messagge")
+    @field: SerializedName("message")
     val message: String,
 
     @field: SerializedName("listStory")
@@ -24,18 +24,18 @@ data class StoryResponseItem(
     val name: String,
 
     @field: SerializedName("description")
-    val  description: String,
+    val description: String,
 
     @field: SerializedName("photoUrl")
-    val photoUrl : String,
+    val photoUrl: String,
 
     @field: SerializedName("createdAt")
     val createdAt: String,
 
     @field:SerializedName("lon")
-    val lon: Double,
+    val lon: Double?,
 
     @field:SerializedName("lat")
-    val lat: Double
+    val lat: Double?
 
 ): Parcelable

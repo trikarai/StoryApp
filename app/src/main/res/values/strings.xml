@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Story App</string>
+    <string name="login_text">Login</string>
+    <string name="register_text">Register</string>
+    <string name="image_description">Image Description</string>
+    <string name="insert_name">Insert Name</string>
+    <string name="insert_email">Insert Email</string>
+    <string name="insert_password">Insert Password</string>
+    <string name="error_email_not_valid">Email not valid</string>
+    <string name="must_filled">Email required</string>
+    <string name="error_password_not_valid">Password min 6 character</string>
+    <string name="login_failed">Login Failed</string>
+    <string name="login_success">Login Success</string>
+    <string name="register_success">Register Success</string>
+    <string name="register_failed">Register Failed</string>
+    <string name="date">Date</string>
+    <string name="description">Description</string>
+    <string name="user_name">User Name</string>
+    <string name="retry">Retry</string>
+    <string name="timeout">Timeout</string>
+    <string name="created_add">Created Add</string>
+    <string name="upload">Upload</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Galery</string>
+    <string name="upload_permission">Upload Permission</string>
+    <string name="upload_success">Upload Success</string>
+    <string name="upload_failed">Upload Failed</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="upload_desc">Upload Description</string>
+    <string name="action_signout">Signout</string>
+    <string name="language_setting">Language</string>
+    <string name="location_permission_denied">Location permission not allowed</string>
+    <string name="location_permission_denied_action">Change Setting</string>
+    <string name="please_activate_location_message">Please activate your location services</string>
+    <string name="style_map_failed" translatable="false">Style parsing failed.</string>
+    <string name="style_map_error" translatable="false">Can\\\'t find style. Error: %s</string>
+    <string name="share_location">Share Location</string>
+</resources>

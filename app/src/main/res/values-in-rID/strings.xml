@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Story App</string>
+    <string name="login_text">Masuk</string>
+    <string name="register_text">Daftar</string>
+    <string name="image_description">Image Description</string>
+    <string name="insert_email">Masukan Email</string>
+    <string name="insert_password">Masukan Kata Sandi</string>
+    <string name="error_email_not_valid">Email tidak valid</string>
+    <string name="must_filled">Email wajid diisi</string>
+    <string name="error_password_not_valid">Password minimal 6 karakter</string>
+    <string name="login_failed">Login Gagal</string>
+    <string name="login_success">Login Berhasil</string>
+    <string name="register_success">Pendaftaran Berhasil</string>
+    <string name="register_failed">Pendaftaran Gagal</string>
+    <string name="insert_name">Masukan Nama</string>
+    <string name="date">Tanggal</string>
+    <string name="description">Deskripsi</string>
+    <string name="user_name">Nama Pengguna</string>
+    <string name="retry">Ulangi</string>
+    <string name="timeout">Waktu Habis</string>
+    <string name="created_add">Tanggal dibuat</string>
+    <string name="upload">Unggah</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="upload_permission">Upload Permission</string>
+    <string name="upload_success">Upload Success</string>
+    <string name="upload_failed">Upload Failed</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="upload_desc">Upload Description</string>
+    <string name="action_signout">Signout</string>
+    <string name="language_setting">Language</string>
+    <string name="please_activate_location_message">Harap aktifkan servis lokasi</string>
+    <string name="location_permission_denied">Akses lokasi tidak diizinkan</string>
+    <string name="location_permission_denied_action">Ubah Pengaturan</string>
+    <string name="share_location">Bagikan Lokasi</string>
+</resources>

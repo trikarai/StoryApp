@@ -27,6 +27,9 @@
         android:theme="@style/Theme.StoryApp"
         tools:targetApi="31" >
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="add your api here" />
 
         <activity
             android:name=".ui.SplashscreenActivity"
@@ -37,6 +40,10 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter></activity>
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true" />
 
         <activity android:name=".ui.auth.LoginActivity" android:exported="false" />
         <activity android:name=".ui.auth.RegisterActivity" android:exported="false" />

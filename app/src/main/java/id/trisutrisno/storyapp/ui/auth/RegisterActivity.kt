@@ -15,7 +15,7 @@ import id.trisutrisno.storyapp.utils.UserViewModelFactory
 class RegisterActivity: AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
 
-    private val registerViewModel: RegisterViewModel by viewModels() {
+    private val registerViewModel: RegisterViewModel by viewModels {
         UserViewModelFactory.getInstance(this)
     }
 

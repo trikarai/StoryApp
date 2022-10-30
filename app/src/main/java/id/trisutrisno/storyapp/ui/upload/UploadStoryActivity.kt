@@ -47,7 +47,7 @@ class UploadStoryActivity : AppCompatActivity() {
     private var getFile: File? = null
     private var location: Location? = null
 
-    private val uploadStoryViewModel: UploadStoryViewModel by viewModels(){
+    private val uploadStoryViewModel: UploadStoryViewModel by viewModels {
         UserViewModelFactory.getInstance(this)
     }
 

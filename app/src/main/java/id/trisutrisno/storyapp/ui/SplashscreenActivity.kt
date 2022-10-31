@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import id.trisutrisno.storyapp.R
 import id.trisutrisno.storyapp.ui.auth.LoginActivity
-import id.trisutrisno.storyapp.ui.story.StoryActivity
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
 
 class SplashscreenActivity : AppCompatActivity() {

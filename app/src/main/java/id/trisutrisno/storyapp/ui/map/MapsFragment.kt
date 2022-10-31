@@ -101,10 +101,11 @@ class MapsFragment : Fragment() {
 
     private fun markStoryLocation() {
         val token = requireActivity().intent.getStringExtra(MainActivity.EXTRA_TOKEN).toString()
+
         mapsViewModel.fetchAllStoryWithLocation(token)
-        mapsViewModel.storyResponse.observe(viewLifecycleOwner){ result ->
+            .observe(viewLifecycleOwner){ result ->
             result.data?.let { storyResponse ->
-                storyResponse.listStory.forEach { story ->
+                storyResponse.forEach { story ->
                     if (story.lat != null && story.lon != null) {
                         val latLng = LatLng(story.lat, story.lon)
 

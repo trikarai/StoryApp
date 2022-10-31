@@ -1,4 +1,4 @@
-package id.trisutrisno.storyapp.data.local.room
+package id.trisutrisno.storyapp.data.local.entity
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = "story_db")
-data class StoryModel(
+data class StoryEntity(
     @PrimaryKey
     val id: String,
     val name: String,

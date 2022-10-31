@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import id.trisutrisno.storyapp.R
-import id.trisutrisno.storyapp.data.remote.user.register.RegisterRequest
 import id.trisutrisno.storyapp.databinding.ActivityRegisterBinding
 import id.trisutrisno.storyapp.utils.Result
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
@@ -45,8 +44,7 @@ class RegisterActivity: AppCompatActivity() {
                      setPasswordError(getString(R.string.error_password_not_valid))
                  }
                  else -> {
-                     val register = RegisterRequest(name, email, password)
-                     registerViewModel.register(register)
+                     registerViewModel.register(name, email, password)
                  }
              }
 
@@ -78,7 +76,8 @@ class RegisterActivity: AppCompatActivity() {
     }
 
     private fun setupObserver() {
-        registerViewModel.registerResponse.observe(this) {
+        registerViewModel.register(binding.nameInput.text.toString().trim(), binding.emailInput.text.toString().trim(), binding.passwordInput.text.toString().trim())
+            .observe(this) {
             registerResponse ->
                 when(registerResponse) {
                     is Result.Loading -> {

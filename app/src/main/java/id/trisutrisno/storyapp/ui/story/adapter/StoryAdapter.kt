@@ -5,17 +5,16 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import id.trisutrisno.storyapp.data.local.room.StoryModel
+import id.trisutrisno.storyapp.data.local.entity.StoryEntity
 import id.trisutrisno.storyapp.databinding.ItemStoryBinding
 import id.trisutrisno.storyapp.ui.story.DetailActivity
 import id.trisutrisno.storyapp.utils.Utils.formatDate
 
-class StoryAdapter : PagingDataAdapter<StoryModel, StoryAdapter.MyViewHolder>(DIFF_CALLBACK){
+class StoryAdapter : PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DIFF_CALLBACK){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -33,7 +32,7 @@ class StoryAdapter : PagingDataAdapter<StoryModel, StoryAdapter.MyViewHolder>(DI
 
 
     inner class MyViewHolder(private val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: StoryModel) {
+        fun bind(data: StoryEntity) {
             binding.apply {
                 Glide.with(itemView).load(data.photoUrl).into(imgStories)
                 tvName.text = data.name
@@ -56,11 +55,11 @@ class StoryAdapter : PagingDataAdapter<StoryModel, StoryAdapter.MyViewHolder>(DI
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryModel>() {
-            override fun areItemsTheSame(oldItem: StoryModel, newItem: StoryModel): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryEntity>() {
+            override fun areItemsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
                 return oldItem == newItem
             }
-            override fun areContentsTheSame(oldItem: StoryModel, newItem: StoryModel): Boolean {
+            override fun areContentsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
                 return oldItem.id == newItem.id
             }
         }

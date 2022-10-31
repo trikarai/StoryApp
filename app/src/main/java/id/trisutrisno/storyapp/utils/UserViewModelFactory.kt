@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import id.trisutrisno.storyapp.dependency.Injection
 import id.trisutrisno.storyapp.repository.StoryRepository
 import id.trisutrisno.storyapp.repository.UserRepository
+import id.trisutrisno.storyapp.ui.SharedViewModel
 import id.trisutrisno.storyapp.ui.SplashViewModel
 import id.trisutrisno.storyapp.ui.auth.LoginViewModel
 import id.trisutrisno.storyapp.ui.auth.RegisterViewModel
@@ -41,10 +42,13 @@ class UserViewModelFactory(
                 StoryViewModel(userRepository, storyRepository) as T
             }
             modelClass.isAssignableFrom(UploadStoryViewModel::class.java) -> {
-                UploadStoryViewModel(userRepository, storyRepository) as T
+                UploadStoryViewModel(storyRepository) as T
             }
             modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
                 MapsViewModel(storyRepository) as T
+            }
+            modelClass.isAssignableFrom(SharedViewModel::class.java) -> {
+                SharedViewModel(userRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

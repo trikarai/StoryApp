@@ -1,12 +1,16 @@
-package id.trisutrisno.storyapp.data.local.room
+package id.trisutrisno.storyapp.data.local.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import id.trisutrisno.storyapp.data.local.dao.RemoteKeysDao
+import id.trisutrisno.storyapp.data.local.dao.StoryDao
+import id.trisutrisno.storyapp.data.local.entity.RemoteKeysEntity
+import id.trisutrisno.storyapp.data.local.entity.StoryEntity
 
 @Database(
-    entities = [StoryModel::class, RemoteKeysModel::class],
+    entities = [StoryEntity::class, RemoteKeysEntity::class],
     version = 1,
     exportSchema = false
 )

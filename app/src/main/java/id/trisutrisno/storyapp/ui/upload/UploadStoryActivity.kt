@@ -23,6 +23,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import id.trisutrisno.storyapp.R
 import id.trisutrisno.storyapp.databinding.ActivityUploadStoryBinding
+import id.trisutrisno.storyapp.ui.SharedViewModel
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
 import id.trisutrisno.storyapp.utils.Result
 import id.trisutrisno.storyapp.utils.Utils
@@ -39,8 +40,6 @@ import java.io.FileOutputStream
 class UploadStoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUploadStoryBinding
-
-    private lateinit var token: String
     private lateinit var currentPhotoPath: String
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -48,6 +47,9 @@ class UploadStoryActivity : AppCompatActivity() {
     private var location: Location? = null
 
     private val uploadStoryViewModel: UploadStoryViewModel by viewModels {
+        UserViewModelFactory.getInstance(this)
+    }
+    private val sharedViewModel: SharedViewModel by viewModels {
         UserViewModelFactory.getInstance(this)
     }
 
@@ -149,28 +151,8 @@ class UploadStoryActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
-        uploadStoryViewModel.fetchUser().observe(this){ userToken ->
-            if (userToken != "") {
-                token = userToken
-            }
-        }
-        uploadStoryViewModel.uploadResponse.observe(this){ response ->
-            when(response) {
-                is Result.Loading -> {
-                    onLoading(true)
-                }
-                is Result.Success -> response.data.let {
-                    onLoading(false)
-                    Toast.makeText(this, getString(R.string.upload_success), Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-                is Result.Error -> response.data.let {
-                    onLoading(false)
-                    Toast.makeText(this, getString(R.string.upload_failed), Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
+            sharedViewModel.fetchUser()
+     }
 
     private fun setupListener(){
         binding.buttonCamera.setOnClickListener {
@@ -213,6 +195,9 @@ class UploadStoryActivity : AppCompatActivity() {
 
 
     private fun uploadStory() {
+
+        val token = sharedViewModel.user.value?.token ?: ""
+
         val inputDescription =  binding.inputDesc
         var isValid = true
 
@@ -240,6 +225,27 @@ class UploadStoryActivity : AppCompatActivity() {
             }
 
             uploadStoryViewModel.uploadStory(token, imageMultipart, description, lat, lon)
+                .observe(this) {
+                    result ->
+                        when (result){
+                            is Result.Loading -> {
+                                onLoading(true)
+                            }
+                            is Result.Success -> {
+                                onLoading(false)
+                                Snackbar.make(
+                                    binding.root, getString(R.string.upload_success), Snackbar.LENGTH_SHORT
+                                ).show()
+                                finish()
+                            }
+                            is Result.Error -> {
+                                onLoading(false)
+                                Snackbar.make(binding.root, getString(R.string.upload_failed), Snackbar.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                }
+
         }
     }
 

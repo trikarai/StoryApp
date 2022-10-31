@@ -1,27 +1,26 @@
-package id.trisutrisno.storyapp.data.remote
+package id.trisutrisno.storyapp.data.remote.api
 
-import id.trisutrisno.storyapp.data.remote.stories.StoryResponse
-import id.trisutrisno.storyapp.data.remote.stories.UploadResponse
-import id.trisutrisno.storyapp.data.remote.user.login.LoginRequest
-import id.trisutrisno.storyapp.data.remote.user.login.LoginResponse
-import id.trisutrisno.storyapp.data.remote.user.register.RegisterRequest
-import id.trisutrisno.storyapp.data.remote.user.register.RegisterResponse
+import id.trisutrisno.storyapp.data.remote.response.GeneralResponse
+import id.trisutrisno.storyapp.data.remote.response.StoryResponse
+import id.trisutrisno.storyapp.data.remote.response.LoginResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
     @POST("login")
     suspend fun login(
-        @Body loginRequest: LoginRequest
-    ): Response<LoginResponse>
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): LoginResponse
 
 
     @POST("register")
     suspend fun register(
-        @Body registerRequest: RegisterRequest
-    ): Response<RegisterResponse>
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): GeneralResponse
 
     @GET("stories")
     suspend fun fetchStories(
@@ -29,7 +28,7 @@ interface ApiService {
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
         @Query("location") location: Int? = null
-    ): Response<StoryResponse>
+    ): StoryResponse
 
     @Multipart
     @POST("stories")
@@ -39,5 +38,5 @@ interface ApiService {
         @Part ("description") description: RequestBody,
         @Part("lat") lat: RequestBody?,
         @Part("lon") lon: RequestBody?
-    ): Response<UploadResponse>
+    ): GeneralResponse
 }

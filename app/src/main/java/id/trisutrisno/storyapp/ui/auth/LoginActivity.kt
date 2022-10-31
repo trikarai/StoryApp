@@ -1,26 +1,26 @@
 package id.trisutrisno.storyapp.ui.auth
 
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import id.trisutrisno.storyapp.R
-import id.trisutrisno.storyapp.data.remote.user.login.LoginRequest
-import id.trisutrisno.storyapp.data.remote.user.login.LoginResult
 import id.trisutrisno.storyapp.databinding.ActivityLoginBinding
-import id.trisutrisno.storyapp.ui.story.StoryActivity
-import id.trisutrisno.storyapp.utils.UserViewModelFactory
+import id.trisutrisno.storyapp.domain.model.toLoggedInUser
+import id.trisutrisno.storyapp.ui.SharedViewModel
 import id.trisutrisno.storyapp.utils.Result
+import id.trisutrisno.storyapp.utils.UserViewModelFactory
 
 class LoginActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels {
+        UserViewModelFactory.getInstance(this)
+    }
+    private val sharedViewModel: SharedViewModel by viewModels {
         UserViewModelFactory.getInstance(this)
     }
 
@@ -53,20 +53,12 @@ class LoginActivity: AppCompatActivity() {
                     setPasswordError(getString(R.string.error_password_not_valid))
                 }
                 else -> {
-                    val login = LoginRequest(email, password)
-                    loginViewModel.login(login)
+                    loginViewModel.login(email, password)
                 }
             }
         }
     }
 
-    private fun onLoading(isLoading: Boolean) {
-        if (isLoading){
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
-    }
 
     private fun setEmailError(e : String?){
         binding.editTextTextEmail.error = e
@@ -79,35 +71,37 @@ class LoginActivity: AppCompatActivity() {
 
 
     private fun setupObserver() {
-        loginViewModel.loginResponse.observe(this) { loginResponse ->
-            when(loginResponse) {
-                is Result.Loading -> {
-                    onLoading(true)
+        loginViewModel.login(binding.editTextTextEmail.toString(), binding.editTextTextPassword.toString())
+            .observe(this) { loginResult ->
+
+                when (loginResult) {
+                    is Result.Loading -> {
+                        setLoading(true)
+                    }
+                    is Result.Success -> loginResult.data?.let {
+                        setLoading(false)
+                        sharedViewModel.saveUser(it.toLoggedInUser())
+                    }
+                    is Result.Error -> {
+                        setLoading(false)
+                        Snackbar.make(binding.root, getString(R.string.login_failed), Snackbar.LENGTH_SHORT)
+                            .show()
+                    }
                 }
-                is Result.Success -> loginResponse.data?.loginResult?.let {
-                    onLoading(false)
-                    onSuccess(it)
-                }
-                is Result.Error -> loginResponse.data.let {
-                    onLoading(false)
-                    onFailed()
-                }
+
             }
+    }
+
+
+
+    private fun setLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.button.isEnabled = false
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.button.isEnabled = true
         }
-    }
-
-    private fun onFailed() {
-        Snackbar.make(binding.root, getString(R.string.login_failed), Snackbar.LENGTH_LONG).show()
-    }
-
-    @SuppressLint("StringFormatInvalid")
-    private fun onSuccess(it: LoginResult) {
-        loginViewModel.saveUser(it.token)
-        Toast.makeText(this, getString(R.string.login_success, it.name), Toast.LENGTH_LONG).show()
-        val intent = Intent(this@LoginActivity, StoryActivity::class.java)
-        intent.putExtra(StoryActivity.EXTRA_TOKEN, it.token)
-        startActivity(intent)
-        finish()
     }
 
     private fun playAnimation() {

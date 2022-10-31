@@ -3,7 +3,7 @@ package id.trisutrisno.storyapp.ui.story
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import id.trisutrisno.storyapp.data.local.room.StoryModel
+import id.trisutrisno.storyapp.data.local.entity.StoryEntity
 import id.trisutrisno.storyapp.databinding.ActivityDetailBinding
 import id.trisutrisno.storyapp.utils.Utils.formatDate
 
@@ -24,7 +24,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setDetail() {
-        val user = intent.getParcelableExtra<StoryModel>(EXTRA_USER)
+        val user = intent.getParcelableExtra<StoryEntity>(EXTRA_USER)
         if (user != null) {
             binding.apply {
                 Glide.with(this@DetailActivity).load(user.photoUrl).into(imgStories)

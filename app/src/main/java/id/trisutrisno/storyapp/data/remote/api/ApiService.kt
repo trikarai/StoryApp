@@ -1,5 +1,6 @@
 package id.trisutrisno.storyapp.data.remote.api
 
+import id.trisutrisno.storyapp.data.remote.request.LoginRequest
 import id.trisutrisno.storyapp.data.remote.response.GeneralResponse
 import id.trisutrisno.storyapp.data.remote.response.StoryResponse
 import id.trisutrisno.storyapp.data.remote.response.LoginResponse
@@ -10,8 +11,7 @@ import retrofit2.http.*
 interface ApiService {
     @POST("login")
     suspend fun login(
-        @Field("email") email: String,
-        @Field("password") password: String
+        @Body request: LoginRequest
     ): LoginResponse
 
 

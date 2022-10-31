@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import id.trisutrisno.storyapp.data.local.datastore.UserPreference
 import id.trisutrisno.storyapp.data.remote.api.ApiService
+import id.trisutrisno.storyapp.data.remote.request.LoginRequest
 import id.trisutrisno.storyapp.data.remote.response.GeneralResponse
 import id.trisutrisno.storyapp.domain.model.LoginResult
 import id.trisutrisno.storyapp.domain.model.User
@@ -15,14 +16,15 @@ class UserRepository(private val apiService: ApiService, private val userPrefere
     liveData {
         emit(Result.Loading())
         try {
-            val response = apiService.login(email, password)
-
+            val request = LoginRequest(email, password)
+            val response = apiService.login(request)
             if (response.error == false) {
                 emit(Result.Success(response.loginResult!!.toDomain()))
             } else {
                 emit(Result.Error(response.message))
             }
         } catch (e: Exception) {
+            e.printStackTrace()
             emit(Result.Error(e.message))
         }
     }

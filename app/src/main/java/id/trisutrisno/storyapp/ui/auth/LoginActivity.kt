@@ -6,13 +6,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
 import id.trisutrisno.storyapp.R
 import id.trisutrisno.storyapp.databinding.ActivityLoginBinding
 import id.trisutrisno.storyapp.domain.model.toLoggedInUser
-import id.trisutrisno.storyapp.ui.SharedViewModel
+import id.trisutrisno.storyapp.ui.MainActivity
+import id.trisutrisno.storyapp.utils.SharedViewModel
 import id.trisutrisno.storyapp.utils.Result
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
+import kotlinx.coroutines.launch
 
 class LoginActivity: AppCompatActivity() {
 
@@ -35,30 +40,52 @@ class LoginActivity: AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        setupListener()
+        binding.button.setOnClickListener{
+            login()
+        }
+
         setupObserver()
         playAnimation()
 
     }
-    private fun setupListener() {
-        binding.button.setOnClickListener{
-            val email = binding.editTextTextEmail.text.toString().trim()
-            val password = binding.editTextTextPassword.text.toString().trim()
 
-            when{
-                email.isEmpty() -> {
-                    setEmailError(getString(R.string.must_filled))
-                }
-                password.length < 6 -> {
-                    setPasswordError(getString(R.string.error_password_not_valid))
-                }
-                else -> {
-                    loginViewModel.login(email, password)
-                }
+    private fun login() {
+        val email = binding.editTextTextEmail.text.toString().trim()
+        val password = binding.editTextTextPassword.text.toString().trim()
+
+        when{
+            email.isEmpty() -> {
+                setEmailError(getString(R.string.must_filled))
+            }
+            password.length < 6 -> {
+                setPasswordError(getString(R.string.error_password_not_valid))
+            }
+            else -> {
+                loginViewModel.login(email, password)
+                    .observe(this@LoginActivity) { loginResult ->
+
+                        when (loginResult) {
+                            is Result.Loading -> {
+                                setLoading(true)
+                            }
+                            is Result.Success -> loginResult.data?.let {
+                                setLoading(false)
+                                sharedViewModel.saveUser(it.toLoggedInUser())
+                            }
+                            is Result.Error -> {
+                                setLoading(false)
+                                Snackbar.make(
+                                    binding.root,
+                                    getString(R.string.login_failed),
+                                    Snackbar.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
+                        }
+                    }
             }
         }
     }
-
 
     private fun setEmailError(e : String?){
         binding.editTextTextEmail.error = e
@@ -68,28 +95,12 @@ class LoginActivity: AppCompatActivity() {
         binding.editTextTextPassword.error = e
     }
 
-
-
     private fun setupObserver() {
-        loginViewModel.login(binding.editTextTextEmail.toString(), binding.editTextTextPassword.toString())
-            .observe(this) { loginResult ->
-
-                when (loginResult) {
-                    is Result.Loading -> {
-                        setLoading(true)
-                    }
-                    is Result.Success -> loginResult.data?.let {
-                        setLoading(false)
-                        sharedViewModel.saveUser(it.toLoggedInUser())
-                    }
-                    is Result.Error -> {
-                        setLoading(false)
-                        Snackbar.make(binding.root, getString(R.string.login_failed), Snackbar.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-
+        sharedViewModel.user.observe(this) { user ->
+            if (user.isLogin) {
+                startActivity(Intent(this, MainActivity::class.java))
             }
+        }
     }
 
 
@@ -105,7 +116,7 @@ class LoginActivity: AppCompatActivity() {
     }
 
     private fun playAnimation() {
-         ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -60f, 60f).apply {
+        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -60f, 60f).apply {
             duration = 6000
             repeatCount = ObjectAnimator.INFINITE
             repeatMode = ObjectAnimator.REVERSE

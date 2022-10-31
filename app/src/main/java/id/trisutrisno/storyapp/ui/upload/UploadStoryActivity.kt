@@ -23,7 +23,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import id.trisutrisno.storyapp.R
 import id.trisutrisno.storyapp.databinding.ActivityUploadStoryBinding
-import id.trisutrisno.storyapp.ui.SharedViewModel
+import id.trisutrisno.storyapp.utils.SharedViewModel
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
 import id.trisutrisno.storyapp.utils.Result
 import id.trisutrisno.storyapp.utils.Utils

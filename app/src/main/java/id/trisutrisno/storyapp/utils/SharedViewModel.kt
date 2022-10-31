@@ -1,4 +1,4 @@
-package id.trisutrisno.storyapp.ui
+package id.trisutrisno.storyapp.utils
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

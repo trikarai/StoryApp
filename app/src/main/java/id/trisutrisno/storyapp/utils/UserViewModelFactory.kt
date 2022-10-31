@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import id.trisutrisno.storyapp.dependency.Injection
 import id.trisutrisno.storyapp.repository.StoryRepository
 import id.trisutrisno.storyapp.repository.UserRepository
-import id.trisutrisno.storyapp.ui.SharedViewModel
 import id.trisutrisno.storyapp.ui.SplashViewModel
 import id.trisutrisno.storyapp.ui.auth.LoginViewModel
 import id.trisutrisno.storyapp.ui.auth.RegisterViewModel

@@ -64,7 +64,5 @@ class StoryAdapter : PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(D
             }
         }
     }
-
-
 }
 

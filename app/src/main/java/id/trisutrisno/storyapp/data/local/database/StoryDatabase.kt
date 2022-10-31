@@ -32,6 +32,7 @@ abstract class StoryDatabase : RoomDatabase() {
                     StoryDatabase::class.java, "story_database"
                 )
                     .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
                     .build()
                     .also { INSTANCE = it }
             }

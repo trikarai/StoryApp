@@ -40,7 +40,6 @@ class StoryViewModelTest {
 
     @Mock
     private lateinit var storyRepository: StoryRepository
-    private lateinit var userRepository: UserRepository
     private lateinit var storyViewModel: StoryViewModel
     private lateinit var context: Context
 
@@ -49,7 +48,7 @@ class StoryViewModelTest {
 
     @Before
     fun setUp() {
-        storyViewModel = StoryViewModel(userRepository, storyRepository)
+        storyViewModel = StoryViewModel(storyRepository)
         context = Mockito.mock(Context::class.java)
     }
 
@@ -66,7 +65,7 @@ class StoryViewModelTest {
             }
         })
 
-        val storyViewModel = StoryViewModel(userRepository, storyRepository)
+        val storyViewModel = StoryViewModel(storyRepository)
         val actualResponse : PagingData<Story> = storyViewModel.fetchAllStory(dummyToken).getOrAwaitValue()
 
         val differ = AsyncPagingDataDiffer(

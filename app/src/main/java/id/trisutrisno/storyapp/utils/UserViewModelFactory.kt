@@ -38,7 +38,7 @@ class UserViewModelFactory(
                 SplashViewModel(userRepository) as T
             }
             modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
-                StoryViewModel(userRepository, storyRepository) as T
+                StoryViewModel(storyRepository) as T
             }
             modelClass.isAssignableFrom(UploadStoryViewModel::class.java) -> {
                 UploadStoryViewModel(storyRepository) as T

@@ -14,15 +14,11 @@ import id.trisutrisno.storyapp.repository.UserRepository
 import kotlinx.coroutines.launch
 
 
-class StoryViewModel(private val userRepository: UserRepository, private val storyRepository: StoryRepository) : ViewModel() {
+class StoryViewModel(private val storyRepository: StoryRepository) : ViewModel() {
     fun fetchAllStory(token: String): LiveData<PagingData<Story>> =
         storyRepository.fetchAllStory(token).map { result ->
             result.map { storyEntity ->
                 storyEntity.toDomain()
             }
         }.cachedIn(viewModelScope)
-
-    fun deleteUser() = viewModelScope.launch {
-        userRepository.deleteUser()
-    }
 }

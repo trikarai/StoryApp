@@ -25,10 +25,9 @@ class SplashscreenActivity : AppCompatActivity() {
     }
 
     private fun validateUser() {
-
         sharedViewModel.fetchUser()
         sharedViewModel.user.observe(this) { user ->
-            if (!user.isLogin) {
+            if (user.isLogin) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }else{

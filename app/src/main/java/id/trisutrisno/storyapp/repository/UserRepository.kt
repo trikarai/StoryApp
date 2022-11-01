@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import id.trisutrisno.storyapp.data.local.datastore.UserPreference
 import id.trisutrisno.storyapp.data.remote.api.ApiService
-import id.trisutrisno.storyapp.data.remote.request.LoginRequest
 import id.trisutrisno.storyapp.data.remote.response.GeneralResponse
 import id.trisutrisno.storyapp.domain.model.LoginResult
 import id.trisutrisno.storyapp.domain.model.User
@@ -23,7 +22,6 @@ class UserRepository(private val apiService: ApiService, private val userPrefere
                 emit(Result.Error(response.message))
             }
         } catch (e: Exception) {
-            e.printStackTrace()
             emit(Result.Error(e.message))
         }
     }
@@ -50,8 +48,6 @@ class UserRepository(private val apiService: ApiService, private val userPrefere
 
     suspend fun deleteUser() = userPreference.deleteUser()
 
-//    fun fetchUser() = userPreference.fetchUser()
-
     companion object {
         private var INSTANCE: UserRepository? = null
         fun getInstance(apiService: ApiService, userPreference: UserPreference): UserRepository {
@@ -61,5 +57,6 @@ class UserRepository(private val apiService: ApiService, private val userPrefere
                 }
             }
         }
+
     }
 }

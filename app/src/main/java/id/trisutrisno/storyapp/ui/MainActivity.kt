@@ -14,15 +14,16 @@ import id.trisutrisno.storyapp.R
 import id.trisutrisno.storyapp.databinding.ActivityMainBinding
 import id.trisutrisno.storyapp.ui.auth.LoginActivity
 import id.trisutrisno.storyapp.ui.story.StoryViewModel
+import id.trisutrisno.storyapp.utils.SharedViewModel
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val storyViewModel: StoryViewModel by viewModels {
+
+    private val sharedViewModel: SharedViewModel by viewModels  {
         UserViewModelFactory.getInstance(this)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.action_sign_out -> {
-                storyViewModel.deleteUser()
+                sharedViewModel.logOut()
                 startActivity(Intent(this@MainActivity, LoginActivity::class.java))
                 finish()
                 true
@@ -57,9 +58,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    companion object {
-        const val EXTRA_TOKEN = "extra_token"
-    }
-
 }

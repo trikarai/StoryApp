@@ -1,6 +1,5 @@
 package id.trisutrisno.storyapp.data.remote.api
 
-import id.trisutrisno.storyapp.data.remote.request.LoginRequest
 import id.trisutrisno.storyapp.data.remote.response.GeneralResponse
 import id.trisutrisno.storyapp.data.remote.response.StoryResponse
 import id.trisutrisno.storyapp.data.remote.response.LoginResponse

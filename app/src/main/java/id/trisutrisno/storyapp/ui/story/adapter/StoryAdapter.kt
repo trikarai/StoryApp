@@ -9,7 +9,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import id.trisutrisno.storyapp.data.local.entity.StoryEntity
 import id.trisutrisno.storyapp.databinding.ItemStoryBinding
 import id.trisutrisno.storyapp.domain.model.Story
 import id.trisutrisno.storyapp.domain.model.toStoryEntity

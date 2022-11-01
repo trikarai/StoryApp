@@ -30,7 +30,6 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import id.trisutrisno.storyapp.R
 import id.trisutrisno.storyapp.databinding.FragmentMapsBinding
-import id.trisutrisno.storyapp.ui.MainActivity
 import id.trisutrisno.storyapp.utils.SharedViewModel
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
 

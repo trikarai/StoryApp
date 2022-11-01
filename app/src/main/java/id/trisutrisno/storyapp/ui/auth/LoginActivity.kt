@@ -7,18 +7,14 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
 import id.trisutrisno.storyapp.R
 import id.trisutrisno.storyapp.databinding.ActivityLoginBinding
 import id.trisutrisno.storyapp.domain.model.toLoggedInUser
 import id.trisutrisno.storyapp.ui.MainActivity
-import id.trisutrisno.storyapp.utils.SharedViewModel
 import id.trisutrisno.storyapp.utils.Result
+import id.trisutrisno.storyapp.utils.SharedViewModel
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
-import kotlinx.coroutines.launch
 
 class LoginActivity: AppCompatActivity() {
 

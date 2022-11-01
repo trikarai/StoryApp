@@ -13,7 +13,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.trisutrisno.storyapp.R
 import id.trisutrisno.storyapp.databinding.ActivityMainBinding
 import id.trisutrisno.storyapp.ui.auth.LoginActivity
-import id.trisutrisno.storyapp.ui.story.StoryViewModel
 import id.trisutrisno.storyapp.utils.SharedViewModel
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
 

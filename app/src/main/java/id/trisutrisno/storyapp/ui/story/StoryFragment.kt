@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.trisutrisno.storyapp.databinding.FragmentStoryBinding
-import id.trisutrisno.storyapp.ui.MainActivity
 import id.trisutrisno.storyapp.ui.auth.LoginActivity
 import id.trisutrisno.storyapp.ui.story.adapter.LoadingStateAdapter
 import id.trisutrisno.storyapp.ui.story.adapter.StoryAdapter

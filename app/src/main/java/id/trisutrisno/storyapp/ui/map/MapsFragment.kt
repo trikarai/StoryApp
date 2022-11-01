@@ -112,7 +112,7 @@ class MapsFragment : Fragment() {
                         Glide.with(this)
                             .asBitmap()
                             .load(story.photoUrl)
-                            .dontTransform()
+                            .circleCrop()
                             .into(object : SimpleTarget<Bitmap?>() {
                                 override fun onResourceReady(
                                     resource: Bitmap,

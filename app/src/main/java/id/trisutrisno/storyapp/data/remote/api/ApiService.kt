@@ -9,12 +9,14 @@ import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
+    @FormUrlEncoded
     @POST("login")
     suspend fun login(
-        @Body request: LoginRequest
+        @Field("email") email: String,
+        @Field("password") password: String
     ): LoginResponse
 
-
+    @FormUrlEncoded
     @POST("register")
     suspend fun register(
         @Field("name") name: String,

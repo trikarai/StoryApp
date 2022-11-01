@@ -16,8 +16,7 @@ class UserRepository(private val apiService: ApiService, private val userPrefere
     liveData {
         emit(Result.Loading())
         try {
-            val request = LoginRequest(email, password)
-            val response = apiService.login(request)
+            val response = apiService.login(email, password)
             if (response.error == false) {
                 emit(Result.Success(response.loginResult!!.toDomain()))
             } else {
@@ -51,7 +50,7 @@ class UserRepository(private val apiService: ApiService, private val userPrefere
 
     suspend fun deleteUser() = userPreference.deleteUser()
 
-    fun fetchUser() = userPreference.fetchUser()
+//    fun fetchUser() = userPreference.fetchUser()
 
     companion object {
         private var INSTANCE: UserRepository? = null

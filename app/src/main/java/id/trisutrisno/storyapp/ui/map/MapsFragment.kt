@@ -31,6 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import id.trisutrisno.storyapp.R
 import id.trisutrisno.storyapp.databinding.FragmentMapsBinding
 import id.trisutrisno.storyapp.ui.MainActivity
+import id.trisutrisno.storyapp.utils.SharedViewModel
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
 
 
@@ -43,6 +44,9 @@ class MapsFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private val mapsViewModel: MapsViewModel by viewModels {
+        UserViewModelFactory.getInstance(requireContext())
+    }
+    private val sharedViewModel: SharedViewModel by viewModels {
         UserViewModelFactory.getInstance(requireContext())
     }
 
@@ -100,7 +104,9 @@ class MapsFragment : Fragment() {
     }
 
     private fun markStoryLocation() {
-        val token = requireActivity().intent.getStringExtra(MainActivity.EXTRA_TOKEN).toString()
+        val token = sharedViewModel.user.value?.token ?: ""
+
+        Log.e(TAG, token)
 
         mapsViewModel.fetchAllStoryWithLocation(token)
             .observe(viewLifecycleOwner){ result ->

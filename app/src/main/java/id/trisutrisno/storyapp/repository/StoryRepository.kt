@@ -16,8 +16,8 @@ import id.trisutrisno.storyapp.utils.Result
 
 class StoryRepository(private val apiService: ApiService, private val storyDatabase: StoryDatabase) {
 
-    @OptIn(ExperimentalPagingApi::class)
     fun fetchAllStory(token: String): LiveData<PagingData<StoryEntity>> {
+        @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(pageSize = 10),
             remoteMediator = StoryRemoteMediator(token, apiService, storyDatabase),

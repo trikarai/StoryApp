@@ -10,7 +10,7 @@ import id.trisutrisno.storyapp.data.local.entity.StoryEntity
 @Dao
 interface StoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertStory(vararg storyEntity: StoryEntity)
+    fun insertStory(storyEntity: StoryEntity)
 
     @Query("SELECT * FROM story_db")
     fun fetchAllStories(): PagingSource<Int, StoryEntity>

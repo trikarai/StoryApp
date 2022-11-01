@@ -10,9 +10,6 @@ import androidx.paging.map
 import id.trisutrisno.storyapp.domain.model.Story
 import id.trisutrisno.storyapp.domain.model.toDomain
 import id.trisutrisno.storyapp.repository.StoryRepository
-import id.trisutrisno.storyapp.repository.UserRepository
-import kotlinx.coroutines.launch
-
 
 class StoryViewModel(private val storyRepository: StoryRepository) : ViewModel() {
     fun fetchAllStory(token: String): LiveData<PagingData<Story>> =

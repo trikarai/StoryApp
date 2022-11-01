@@ -11,7 +11,6 @@ import id.trisutrisno.storyapp.MainDispatcherRule
 import id.trisutrisno.storyapp.domain.model.Story
 import id.trisutrisno.storyapp.domain.model.toStoryEntity
 import id.trisutrisno.storyapp.repository.StoryRepository
-import id.trisutrisno.storyapp.repository.UserRepository
 import id.trisutrisno.storyapp.ui.story.adapter.StoryAdapter
 import id.trisutrisno.storyapp.utils.DataDummy
 import id.trisutrisno.storyapp.utils.getOrAwaitValue

@@ -7,13 +7,12 @@ import id.trisutrisno.storyapp.data.local.entity.RemoteKeysEntity
 
 @Dao
 interface RemoteKeysDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(remoteKeyModel: List<RemoteKeysEntity>)
+    suspend fun insertAll(remoteKey: List<RemoteKeysEntity>)
 
     @Query("SELECT * FROM remote_keys WHERE id = :id")
-    fun getRemoteKeysId(id: String): RemoteKeysEntity?
+    suspend fun getRemoteKeysId(id: String): RemoteKeysEntity?
 
     @Query("DELETE FROM remote_keys")
-    fun deleteRemoteKeys()
+    suspend fun deleteRemoteKeys()
 }

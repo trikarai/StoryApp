@@ -31,15 +31,11 @@ class UserPreference(private  val dataStore: DataStore<Preferences>) {
     }
 
     suspend fun deleteUser() {
-        dataStore.edit {
-            preferences -> preferences.clear()
-        }
-    }
-
-    fun fetchUser(): Flow<String> {
-        return dataStore.data.map { 
-            preferences ->
-            preferences[TOKEN_KEY] ?: ""
+        dataStore.edit { preferences ->
+            preferences[USERID_KEY] = ""
+            preferences[NAME_KEY] = ""
+            preferences[TOKEN_KEY] = ""
+            preferences[STATE_KEY] = false
         }
     }
 

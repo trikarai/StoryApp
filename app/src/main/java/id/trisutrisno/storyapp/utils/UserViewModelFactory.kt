@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import id.trisutrisno.storyapp.dependency.Injection
 import id.trisutrisno.storyapp.repository.StoryRepository
 import id.trisutrisno.storyapp.repository.UserRepository
-import id.trisutrisno.storyapp.ui.SplashViewModel
 import id.trisutrisno.storyapp.ui.auth.LoginViewModel
 import id.trisutrisno.storyapp.ui.auth.RegisterViewModel
 import id.trisutrisno.storyapp.ui.map.MapsViewModel
@@ -33,9 +32,6 @@ class UserViewModelFactory(
             }
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 RegisterViewModel(userRepository) as T
-            }
-            modelClass.isAssignableFrom(SplashViewModel::class.java) -> {
-                SplashViewModel(userRepository) as T
             }
             modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
                 StoryViewModel(storyRepository) as T

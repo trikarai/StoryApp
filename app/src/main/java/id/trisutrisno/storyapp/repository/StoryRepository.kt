@@ -20,7 +20,7 @@ class StoryRepository(private val apiService: ApiService, private val storyDatab
         @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(pageSize = 10),
-            remoteMediator = StoryRemoteMediator(token, apiService, storyDatabase),
+            remoteMediator = StoryRemoteMediator(generateBearerToken(token), apiService, storyDatabase),
             pagingSourceFactory = {
                 storyDatabase.storyDao().fetchAllStories()
             }).liveData

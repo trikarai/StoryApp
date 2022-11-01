@@ -42,7 +42,7 @@ class StoryRemoteMediator(
             }
           }
 
-            val responseData = api.fetchStories("Bearer $token", page, state.config.pageSize)
+            val responseData = api.fetchStories(token, page, state.config.pageSize)
 
             val endOfPaginationReached = responseData.listStory.isEmpty()
 

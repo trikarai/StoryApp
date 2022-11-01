@@ -2,6 +2,7 @@ package id.trisutrisno.storyapp.ui.story
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.trisutrisno.storyapp.databinding.FragmentStoryBinding
 import id.trisutrisno.storyapp.ui.MainActivity
+import id.trisutrisno.storyapp.ui.auth.LoginActivity
 import id.trisutrisno.storyapp.ui.story.adapter.LoadingStateAdapter
 import id.trisutrisno.storyapp.ui.story.adapter.StoryAdapter
 import id.trisutrisno.storyapp.ui.upload.UploadStoryActivity
+import id.trisutrisno.storyapp.utils.SharedViewModel
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
 
 class StoryFragment: Fragment() {
@@ -21,22 +24,41 @@ class StoryFragment: Fragment() {
 
     private lateinit var storyAdapter: StoryAdapter
 
-    private val homeViewModel: StoryViewModel by viewModels {
+    private val storyViewModel: StoryViewModel by viewModels {
+        UserViewModelFactory.getInstance(requireContext())
+    }
+
+    private val sharedViewModel: SharedViewModel by viewModels  {
         UserViewModelFactory.getInstance(requireContext())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentStoryBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvStories.layoutManager = LinearLayoutManager(requireContext())
+        binding.apply {
 
-        fetchData()
+            rvStories.adapter = StoryAdapter()
+            rvStories.setHasFixedSize(true)
+            rvStories.layoutManager = LinearLayoutManager(requireContext())
+        }
         setListener()
+        setObserver()
+        fetchData()
+    }
+
+    private fun setObserver() {
+        sharedViewModel.fetchUser()
+        sharedViewModel.user.observe(viewLifecycleOwner) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(activity, LoginActivity::class.java))
+            }
+        }
     }
 
     override fun onResume() {
@@ -50,10 +72,11 @@ class StoryFragment: Fragment() {
     }
 
     private fun fetchData() {
-        val token = requireActivity().intent.getStringExtra(MainActivity.EXTRA_TOKEN).toString()
         storyAdapter = StoryAdapter()
 
-        homeViewModel.fetchAllStory(token).observe(viewLifecycleOwner) {
+        val token = sharedViewModel.user.value?.token ?: ""
+
+        storyViewModel.fetchAllStory(token).observe(viewLifecycleOwner) {
             storyAdapter.submitData(lifecycle, it)
         }
 

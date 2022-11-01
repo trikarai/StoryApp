@@ -7,11 +7,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import id.trisutrisno.storyapp.R
 import id.trisutrisno.storyapp.ui.auth.LoginActivity
+import id.trisutrisno.storyapp.utils.SharedViewModel
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
 
 class SplashscreenActivity : AppCompatActivity() {
 
-    private val viewModel: SplashViewModel by viewModels{
+    private val sharedViewModel: SharedViewModel by viewModels{
         UserViewModelFactory.getInstance(this)
     }
 
@@ -24,12 +25,13 @@ class SplashscreenActivity : AppCompatActivity() {
     }
 
     private fun validateUser() {
-        viewModel.fetchUser().observe(this){ token ->
-            if (token != ""){
-                startActivity(Intent(this, MainActivity::class.java).putExtra(
-                    MainActivity.EXTRA_TOKEN, token))
+
+        sharedViewModel.fetchUser()
+        sharedViewModel.user.observe(this) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
-            } else {
+            }else{
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }

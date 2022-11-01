@@ -7,8 +7,8 @@ import id.trisutrisno.storyapp.repository.UserRepository
 
 class SplashViewModel(private val repository: UserRepository) : ViewModel() {
 
-    fun fetchUser(): LiveData<String> {
-        return repository.fetchUser().asLiveData()
-    }
+//    fun fetchUser(): LiveData<String> {
+//        return repository.getUser()
+//    }
 
 }

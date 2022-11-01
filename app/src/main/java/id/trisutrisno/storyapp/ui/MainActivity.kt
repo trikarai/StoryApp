@@ -19,7 +19,7 @@ import id.trisutrisno.storyapp.utils.UserViewModelFactory
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val homeViewModel: StoryViewModel by viewModels {
+    private val storyViewModel: StoryViewModel by viewModels {
         UserViewModelFactory.getInstance(this)
     }
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.action_sign_out -> {
-                homeViewModel.deleteUser()
+                storyViewModel.deleteUser()
                 startActivity(Intent(this@MainActivity, LoginActivity::class.java))
                 finish()
                 true

@@ -52,7 +52,7 @@ class LoginActivity: AppCompatActivity() {
 
         when{
             email.isEmpty() -> {
-                setEmailError(getString(R.string.must_filled))
+                setEmailError(getString(R.string.email_must_filled))
             }
             password.length < 6 -> {
                 setPasswordError(getString(R.string.error_password_not_valid))

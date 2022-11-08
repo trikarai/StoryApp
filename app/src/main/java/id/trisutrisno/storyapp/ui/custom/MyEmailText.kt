@@ -56,7 +56,7 @@ class MyEmailText : AppCompatEditText, View.OnTouchListener {
     }
 
     private fun showError() {
-        error = context.getString(R.string.must_filled)
+        error = context.getString(R.string.email_must_filled)
     }
 
     private fun showClearButton(){

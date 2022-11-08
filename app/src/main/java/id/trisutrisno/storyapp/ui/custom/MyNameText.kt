@@ -33,7 +33,7 @@ class MyNameText: AppCompatEditText {
     }
 
     private fun showError() {
-        error = context.getString(R.string.must_filled)
+        error = context.getString(R.string.name_must_filled)
     }
 
     private fun showClearButton() {

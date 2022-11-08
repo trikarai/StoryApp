@@ -67,7 +67,6 @@ class LoginActivity: AppCompatActivity() {
                             }
                             is Result.Success -> loginResult.data?.let {
                                 setLoading(false)
-                                Log.e("LoginActivity", it.toString())
                                 sharedViewModel.saveUser(it.toLoggedInUser())
                             }
                             is Result.Error -> {

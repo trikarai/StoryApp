@@ -1,6 +1,7 @@
 package id.trisutrisno.storyapp.ui.auth
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -26,7 +27,6 @@ class RegisterActivity: AppCompatActivity() {
         supportActionBar?.hide()
 
         setupListener()
-        setupObserver()
         playAnimation()
     }
 
@@ -37,14 +37,17 @@ class RegisterActivity: AppCompatActivity() {
              val password = binding.passwordInput.text.toString().trim()
 
              when {
+                 name.isEmpty() -> {
+                     setNameError(getString(R.string.name_must_filled))
+                 }
                  email.isEmpty() -> {
-                     setEmailError(getString(R.string.must_filled))
+                     setEmailError(getString(R.string.email_must_filled))
                  }
                  password.length < 6 -> {
                      setPasswordError(getString(R.string.error_password_not_valid))
                  }
                  else -> {
-                     registerViewModel.register(name, email, password)
+                     register()
                  }
              }
 
@@ -58,9 +61,13 @@ class RegisterActivity: AppCompatActivity() {
     private fun setEmailError(string: String?) {
         binding.emailInput.error = string
     }
+    private fun setNameError(string: String?) {
+        binding.nameInput.error = string
+    }
 
     private fun onSuccess() {
         Snackbar.make(binding.root, getString(R.string.register_success), Snackbar.LENGTH_LONG).show()
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 
     private fun onFailed() {
@@ -70,12 +77,14 @@ class RegisterActivity: AppCompatActivity() {
     private fun onLoading(isLoading: Boolean) {
         if (isLoading){
             binding.progressBar.visibility = View.VISIBLE
+            binding.registerButton.isEnabled = false
         } else {
             binding.progressBar.visibility = View.GONE
+            binding.registerButton.isEnabled = true
         }
     }
 
-    private fun setupObserver() {
+    private fun register() {
         registerViewModel.register(binding.nameInput.text.toString().trim(), binding.emailInput.text.toString().trim(), binding.passwordInput.text.toString().trim())
             .observe(this) {
             registerResponse ->

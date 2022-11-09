@@ -1,6 +1,7 @@
 package id.trisutrisno.storyapp.ui.map
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Bitmap
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import id.trisutrisno.storyapp.R
 import id.trisutrisno.storyapp.databinding.FragmentMapsBinding
+import id.trisutrisno.storyapp.ui.auth.LoginActivity
 import id.trisutrisno.storyapp.utils.SharedViewModel
 import id.trisutrisno.storyapp.utils.UserViewModelFactory
 
@@ -62,7 +64,7 @@ class MapsFragment : Fragment() {
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
-
+        setObserver()
         getCurrentLocation()
         markStoryLocation()
         setMapStyle()
@@ -102,10 +104,17 @@ class MapsFragment : Fragment() {
         }
     }
 
+    private fun setObserver() {
+        sharedViewModel.fetchUser()
+        sharedViewModel.user.observe(viewLifecycleOwner) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(activity, LoginActivity::class.java))
+            }
+        }
+    }
+
     private fun markStoryLocation() {
         val token = sharedViewModel.user.value?.token ?: ""
-
-        Log.e(TAG, token)
 
         mapsViewModel.fetchAllStoryWithLocation(token)
             .observe(viewLifecycleOwner){ result ->

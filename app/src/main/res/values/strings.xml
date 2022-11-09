@@ -10,7 +10,6 @@
     <string name="email_must_filled">Email required</string>
     <string name="error_password_not_valid">Password min 6 character</string>
     <string name="login_failed">Login Failed</string>
-    <string name="login_success">Login Success</string>
     <string name="register_success">Register Success</string>
     <string name="register_failed">Register Failed</string>
     <string name="date">Date</string>
@@ -18,7 +17,6 @@
     <string name="user_name">User Name</string>
     <string name="retry">Retry</string>
     <string name="timeout">Timeout</string>
-    <string name="created_add">Created Add</string>
     <string name="upload">Upload</string>
     <string name="camera">Camera</string>
     <string name="gallery">Galery</string>

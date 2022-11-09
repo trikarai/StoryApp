@@ -10,7 +10,6 @@
     <string name="email_must_filled">Email wajid diisi</string>
     <string name="error_password_not_valid">Password minimal 6 karakter</string>
     <string name="login_failed">Login Gagal</string>
-    <string name="login_success">Login Berhasil</string>
     <string name="register_success">Pendaftaran Berhasil</string>
     <string name="register_failed">Pendaftaran Gagal</string>
     <string name="insert_name">Masukan Nama</string>
@@ -19,7 +18,6 @@
     <string name="user_name">Nama Pengguna</string>
     <string name="retry">Ulangi</string>
     <string name="timeout">Waktu Habis</string>
-    <string name="created_add">Tanggal dibuat</string>
     <string name="upload">Unggah</string>
     <string name="camera">Kamera</string>
     <string name="gallery">Galeri</string>
